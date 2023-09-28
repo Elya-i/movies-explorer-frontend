@@ -1,0 +1,81 @@
+.about-me {
+  padding: 110px 70px 0;
+}
+
+.about-me__title {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 23px;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+  border-bottom: 1px solid #DADADA;
+}
+
+.biography {
+  margin: 0;
+  padding: 66px 0 0 0;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto auto auto;
+  grid-template-areas:
+    "name photo"
+    "profession photo"
+    "paragraph photo"
+    "link photo";
+  justify-content: space-between;
+  column-gap: 50px;
+}
+
+.biography__name {
+  grid-area: name;
+  margin: 0;
+  padding: 0;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 58px;
+  letter-spacing: -2px;
+}
+
+.biography__profession {
+  grid-area: profession;
+  margin: 0;
+  padding: 0;
+  padding-top: 18px;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.biography__paragraph {
+  grid-area: paragraph;
+  margin: 0;
+  padding: 26px 0 100px 0;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  max-width: 600px;
+}
+
+.biography__link {
+  grid-area: link;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.biography__photo {
+  grid-area: photo;
+  width: 270px;
+  height: 327px;
+  border-radius: 10px;
+  object-fit: cover;
+}
