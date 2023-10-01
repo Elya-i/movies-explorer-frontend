@@ -19,7 +19,7 @@ function AboutMe() {
           компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься 
           фриланс-заказами и ушёл с постоянной работы.
         </p>
-        <a className="biography__link"
+        <a className="biography__link link"
           href="https://github.com/Elya-i"
           rel="noreferrer"
           target="_blank">

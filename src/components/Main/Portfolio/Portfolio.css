@@ -47,14 +47,8 @@
   font-weight: 400;
   line-height: 1.6;
   letter-spacing: -0.04em;
-  color: #ffffff;
-  text-decoration: none;
   transition: opacity .3s ease-in-out;
   opacity: 1;
-}
-
-.portfolio__link:hover {
-  opacity: .6;
 }
 
 .portfolio__links-arrow {

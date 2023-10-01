@@ -8,7 +8,7 @@ function Portfolio() {
       <ul className="portfolio__list">
         <li className="portfolio__list-item">
           <a
-            className="portfolio__link"
+            className="portfolio__link link"
             href="https://Elya-i.github.io/how-to-learn/"
             target="_blank"
             rel="noreferrer"
@@ -19,7 +19,7 @@ function Portfolio() {
         </li>
         <li className="portfolio__list-item">
           <a
-            className="portfolio__link"
+            className="portfolio__link link"
             href="https://Elya-i.github.io/russian-travel/"
             target="_blank"
             rel="noreferrer"
@@ -30,7 +30,7 @@ function Portfolio() {
         </li>
         <li className="portfolio__list-item">
           <a
-            className="portfolio__link"
+            className="portfolio__link link"
             href="https://elya-i.students.nomoredomainsicu.ru"
             target="_blank"
             rel="noreferrer"

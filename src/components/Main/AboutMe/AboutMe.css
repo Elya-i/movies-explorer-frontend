@@ -68,8 +68,8 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  color: #ffffff;
-  text-decoration: none;
+  transition: opacity .3s ease-in-out;
+  opacity: 1;
 }
 
 .biography__photo {

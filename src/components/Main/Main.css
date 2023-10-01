@@ -1,16 +1,21 @@
 .main {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
   width: 100%;
 }
 
 .main__container {
+  width: 100%;
+  border: none;
+}
+
+.main__section {
   display: flex;
   align-items: center;
   flex-direction: column;
+  box-sizing: border-box;
   width: 100%;
-  border: none;
+  max-width: 1280px;
+  padding-right: 70px;
+  padding-left: 70px;
 }
 
 .main__container_theme_blue {
@@ -24,5 +29,3 @@
 .main__container_theme_gray {
   background-color: #272727;
 }
-
-

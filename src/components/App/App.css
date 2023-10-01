@@ -1,7 +1,4 @@
 .page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   min-width: 320px;
   min-height: 100vh;
   background-color: #202020;
@@ -15,6 +12,35 @@
   text-rendering: optimizeLegibility;
 }
 
-/* .page_color_blue {
+.page__container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.page__container_blue {
   background-color: #073042;
-} */
+}
+
+.link {
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+.link:hover {
+  opacity: .7;
+  cursor: pointer;
+}
+
+.button {
+  border: none;
+  border-radius: 3px;
+}
+
+.button:hover {
+  opacity: .8;
+  cursor: pointer;
+}
