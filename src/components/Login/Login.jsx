@@ -20,7 +20,7 @@ function Login() {
                 id="email-input"
                 className="authorization__input"
                 type="email"
-                placeholder="Введите ваш email"
+                placeholder="Введите email"
                 name="email"
                 minLength="5"
                 maxLength="30"

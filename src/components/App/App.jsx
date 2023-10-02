@@ -40,7 +40,7 @@ function App() {
             <Route exact path="/" element={<Main loggedIn={isLoggedIn} />}/>
             <Route path="/movies" element={<Movies movies={movies} />}/>
             <Route path="/saved-movies" element={<SavedMovies/>} />
-            <Route path="/profile" element={<Profile setCurrentUser={setCurrentUser}/>} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/signup" element={<Register/>}/>
             <Route path="/signin" element={<Login setCurrentUser={setCurrentUser}/>} />
             <Route path="*" element={<PageNotFound/>} />

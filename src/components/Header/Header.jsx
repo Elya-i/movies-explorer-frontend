@@ -1,12 +1,15 @@
 import "./Header.css";
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import headerLogo from "../../images/header-logo.svg";
-import NavBar from "../NavBar/NavBar";
+import Navigation from "../Navigation/Navigation";
 import './Header.css';
 
 function Header({ loggedIn }) {
-
+  const [isNavigationOpen, setNavigationOpen] = useState(false);
+  const handleClickOnHamburger = () => {
+    setNavigationOpen(!isNavigationOpen);
+  };
   const location = useLocation();
 
   return location.pathname === '/'
@@ -18,13 +21,28 @@ function Header({ loggedIn }) {
         <Link to='/' className="link">
           <img src={headerLogo} className="header__logo" alt="Логотип проекта Movies Explorer" />
         </Link>
-        <NavBar loggedIn={loggedIn} />
-      </header>
+      {loggedIn
+       ? <>
+         <Navigation isNavigationOpen={isNavigationOpen}/>
+         <button className={`header__side-menu ${isNavigationOpen && "header__side-menu_opened"}`}
+                 onClick={handleClickOnHamburger}/>
+       </>
+       : <ul className="header__auth">
+         <li>
+           <NavLink className="header__link header__link_register link" to="/signup">Регистрация</NavLink>
+         </li>
+         <li>
+           <NavLink className="header__link header__link_login link" to="/signin">Войти</NavLink>
+         </li>
+       </ul>
+      }
+    </header>
     )
     :
-    (<>
-      
-    </>);
+    (
+    <>
+    </>
+    );
 
 }
 export default Header;
