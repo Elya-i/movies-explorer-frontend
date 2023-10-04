@@ -9,7 +9,7 @@ function FilterCheckbox(filterText) {
           type="checkbox"
           className="filter-checkbox__input"
         />
-        <span className="filter-checkbox__round" />
+        <span className="filter-checkbox__toggle-icon" />
       </label>
       <p className="filter-checkbox__text">Короткометражки</p>
     </div>

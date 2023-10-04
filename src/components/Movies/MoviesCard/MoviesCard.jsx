@@ -10,16 +10,16 @@ function MoviesCard({ data }) {
   }
   return (
     <div className="card">
+     <img src={image.url} className="card__image" alt="Изображение фильма" />
       <div className="card__information">
         <p className="card__title">{nameRU}</p>
-        <p className="card__time">{`${duration} мин.`}</p>
         <button
-            className={pathname === "/movies" ?
-              `card__like-button ${isAdded ? "card__like-button_active" : ""}`
-              : "card__delete-button"}
-            onClick={handleClick}/>
+          className={pathname === "/movies" ?
+            `card__like-button button ${isAdded ? "card__like-button_active button" : ""}`
+            : "card__delete-button button"}
+          onClick={handleClick}/>
+        <p className="card__time">{`${duration}`}</p>
       </div>
-      <img src={image.url} alt="Изображение фильма." className="card__image"/>
     </div>
   );
 }

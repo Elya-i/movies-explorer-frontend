@@ -1,5 +1,4 @@
 .authorization {
-  /* height: 100vh; */
   display: flex;
   justify-content: center;
   margin: 0 auto;
@@ -132,7 +131,7 @@
   }
 }
 
-@media screen and (max-width: 549px) {
+@media screen and (max-width: 576px) {
   .authorization__container {
     padding-top: 53px;
     padding-bottom: 18px;

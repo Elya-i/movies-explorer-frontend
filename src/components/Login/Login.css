@@ -2,7 +2,7 @@
   padding-bottom: 160px;
 }
 
-@media screen and (max-width: 549px) {
+@media screen and (max-width: 576px) {
   .authorization__error_login {
     padding-bottom: 245px;
   }

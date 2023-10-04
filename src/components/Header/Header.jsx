@@ -27,7 +27,7 @@ function Header({ loggedIn }) {
          <button className={`header__side-menu ${isNavigationOpen && "header__side-menu_opened"}`}
                  onClick={handleClickOnHamburger}/>
        </>
-       : <ul className="header__auth">
+       : <ul className="header__authorized-user">
          <li>
            <NavLink className="header__link header__link_register link" to="/signup">Регистрация</NavLink>
          </li>

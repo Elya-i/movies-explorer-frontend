@@ -16,7 +16,7 @@ export const movies = [
   {
     id: 1,
     nameRU: "33 слова о дизайне",
-    duration: 102,
+    duration: '1ч 47м',
     image: {
       url: movie1,
     },
@@ -25,7 +25,7 @@ export const movies = [
   {
     id: 2,
     nameRU: "Киноальманах «100 лет дизайна»",
-    duration: 102,
+    duration: '1ч 3м',
     image: {
       url: movie2,
     },
@@ -34,7 +34,7 @@ export const movies = [
   {
     id: 3,
     nameRU: "В погоне за Бенкси",
-    duration: 102,
+    duration: '1ч 42м',
     image: {
       url: movie3,
     },
@@ -43,7 +43,7 @@ export const movies = [
   {
     id: 4,
     nameRU: "Баския: Взрыв реальности",
-    duration: 102,
+    duration: '1ч 21м',
     image: {
       url: movie4,
     },
@@ -52,7 +52,7 @@ export const movies = [
   {
     id: 5,
     nameRU: "Бег это свобода",
-    duration: 102,
+    duration: '1ч 44м',
     image: {
       url: movie5,
     },
@@ -61,7 +61,7 @@ export const movies = [
   {
     id: 6,
     nameRU: "Книготорговцы",
-    duration: 102,
+    duration: '1ч 37м',
     image: {
       url: movie6,
     },
@@ -70,7 +70,7 @@ export const movies = [
   {
     id: 7,
     nameRU: "Когда я думаю о Германии ночью",
-    duration: 102,
+    duration: '1ч 56м',
     image: {
       url: movie7,
     },
@@ -79,7 +79,7 @@ export const movies = [
   {
     id: 8,
     nameRU: "Gimme Danger: История Игги и The Stooge...",
-    duration: 102,
+    duration: '1ч 59м',
     image: {
       url: movie8,
     },
@@ -88,7 +88,7 @@ export const movies = [
   {
     id: 9,
     nameRU: "Дженис: Маленькая девочка грустит",
-    duration: 102,
+    duration: '1ч 42м',
     image: {
       url: movie9,
     },
@@ -97,7 +97,7 @@ export const movies = [
   {
     id: 10,
     nameRU: "Соберись перед прыжком",
-    duration: 102,
+    duration: '1ч 10м',
     image: {
       url: movie10,
     },
@@ -106,7 +106,7 @@ export const movies = [
   {
     id: 11,
     nameRU: "Пи Джей Харви: A dog called money",
-    duration: 102,
+    duration: '1ч 4м',
     image: {
       url: movie11,
     },
@@ -115,10 +115,12 @@ export const movies = [
   {
     id: 12,
     nameRU: "По волнам: Искусство звука в кино",
-    duration: 102,
+    duration: '1ч 7м',
     image: {
       url: movie12,
     },
     saved: true,
   },
 ];
+
+export const techList = ['HTML', 'CSS', 'JS', 'React', 'Git', 'Express.js', 'mongoDB',];

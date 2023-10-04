@@ -54,3 +54,42 @@
 .portfolio__links-arrow {
   line-height: 1.2;
 }
+
+@media screen and (max-width: 768px) {
+  .portfolio {
+    padding: 91px 0 90px 0;
+  }
+
+  .portfolio__link {
+    font-size: 28px;
+    line-height: 1.8;
+  }
+
+  .portfolio__links-arrow {
+    font-size: 28px;
+    line-height: 2.14;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .portfolio {
+    padding: 70px 0;
+  }
+
+  .portfolio__title {
+    margin-bottom: 40px;
+    font-size: 14px;
+    line-height: 1.42;
+  }
+
+  .portfolio__link {
+    height: 28px;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  .portfolio__links-arrow {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+}

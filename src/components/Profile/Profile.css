@@ -1,0 +1,152 @@
+.profile {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 74px 0 70px;
+}
+
+.profile__container {
+  box-sizing: border-box;
+  width: 410px;
+}
+
+.profile__title {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 29px;
+}
+
+.profile__form {
+  margin: 0;
+  padding: 0;
+  padding-top: 106px;
+  background-color: initial;
+}
+
+.profile__fieldset {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  border: none;
+}
+
+.profile__input-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  padding: 17px 0 16px 0;
+}
+
+.profile__input-container:first-of-type {
+  border-bottom: 1px solid #424242;
+}
+
+.profile__input-label {
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 13px;
+}
+
+.profile__input {
+  text-align: right;
+  width: 122px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: inherit;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px;  
+}
+
+.profile__input:focus {
+  outline: none;
+  opacity: 0.4;
+}
+
+.profile__button-container {
+  padding: 205px 0 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__button {
+  color: #ffffff;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: normal;
+  border: none;
+  margin: 0;
+  padding: 0;
+  background-color: initial;
+}
+
+.profile__button_submit {
+  border: none;
+  border-radius: 3px;
+  background: #4285f4;
+  text-align: center;
+  font-weight: 500;
+  width: 410px;
+  padding: 13px 0;
+}
+
+.profile__button_logout {
+  padding-top: 16px;
+  color: #EE3465;
+}
+
+@media screen and (max-width: 768px) {
+  .profile {
+    padding-top: 235px;
+  }
+
+  .profile__form {
+    padding-top: 81px;
+  }
+
+  .profile__button-container {
+    padding-top: 195px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .profile {
+    padding-top: 70px;
+    padding-bottom: 40px;
+  }
+
+  .profile__container {
+    padding-bottom: 0;
+    width: 260px;
+  }
+
+  .profile__title {
+    padding-right: 0;
+  }
+
+  .profile__form {
+    padding-top: 63px;
+  }
+
+  .profile__button-container {
+    padding-top: 365px;
+  }
+
+  .profile__button {
+    font-size: 12px;
+  }
+
+  .profile__button_submit {
+    width: 260px;
+  }
+}
+

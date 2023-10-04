@@ -5,8 +5,9 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 
 function MoviesCardList() {
   const cardElements = movies.slice(0,12).map((item) => <li key={item.id}><MoviesCard data={item}/></li>);
+  
   return (
-    <ul className="cards">
+    <ul className="card-list">
       {cardElements}
     </ul>
   );
