@@ -1,12 +1,10 @@
 import React from 'react';
-import SearchForm from '../Movies/SearchForm/SearchForm';
-import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
+import Movies from '../Movies/Movies';
 
 function SavedMovies() {
   return (
-    <main className="main">
-      <SearchForm />
-      <MoviesCardList />
+    <main className="saved-movies">
+      <Movies />
     </main>
   );
 }

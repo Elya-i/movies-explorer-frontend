@@ -15,7 +15,7 @@ function AboutProject( ) {
         </article>
         <article className="about-project__article">
           <h3 className="about-project__article-title">На выполнение диплома ушло 5 недель</h3>
-          <p className="about-project__article-parapraph">
+          <p className="about-project__article-paragraph">
             У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать,
             чтобы успешно защититься.
           </p>

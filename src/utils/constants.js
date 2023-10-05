@@ -122,5 +122,3 @@ export const movies = [
     saved: true,
   },
 ];
-
-export const techList = ['HTML', 'CSS', 'JS', 'React', 'Git', 'Express.js', 'mongoDB',];

@@ -29,3 +29,17 @@
 .main__container_theme_gray {
   background-color: #272727;
 }
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  main.section {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  main.section {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+}

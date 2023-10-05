@@ -96,7 +96,7 @@
 
   .header__side-menu_opened {
     position: absolute;
-    background: url('../../images/close-button.svg') center no-repeat;
+    background: url('../../images/close-button-side-menu.svg') center no-repeat;
     background-size: cover;
     top: 23px;
     right: 23px;

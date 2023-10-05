@@ -4,6 +4,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 
 import Header from '../Header/Header';
 import Main from "../Main/Main";
+import Footer from "../Footer/Footer";
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
@@ -44,8 +45,9 @@ function App() {
             <Route path="/signup" element={<Register/>}/>
             <Route path="/signin" element={<Login setCurrentUser={setCurrentUser}/>} />
             <Route path="*" element={<PageNotFound/>} />
-          </Routes>
-        </CurrentUserContext.Provider>
+        </Routes>
+        <Footer />
+      </CurrentUserContext.Provider>
     </div>
   );
 }
