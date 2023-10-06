@@ -1,9 +1,9 @@
 .page {
   min-width: 320px;
   min-height: 100vh;
-  background-color: #202020;
   color: #ffffff;
   font-family: "Inter", "Arial", "Helvetica", sans-serif;
+  background-color: #202020;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
@@ -12,15 +12,9 @@
   text-rendering: optimizeLegibility;
 }
 
-.page__container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-}
-
-.page__container_blue {
-  background-color: #073042;
+page__content {
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 .link {

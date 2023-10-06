@@ -1,5 +1,6 @@
 .about-me {
   padding: 110px 70px 0;
+  background-color: #202020;
 }
 
 .about-me__title {
@@ -13,7 +14,7 @@
   border-bottom: 1px solid #DADADA;
 }
 
-.biography {
+.about-me__biography {
   margin: 0;
   padding: 66px 0 0 0;
   display: grid;
@@ -22,13 +23,13 @@
   grid-template-areas:
     "name photo"
     "profession photo"
-    "paragraph photo"
+    "text photo"
     "link photo";
   column-gap: 50px;
   justify-content: space-between;
 }
 
-.biography__name {
+.about-me__biography-name {
   grid-area: name;
   margin: 0;
   padding: 0;
@@ -39,7 +40,7 @@
   letter-spacing: -2px;
 }
 
-.biography__profession {
+.about-me__biography-profession {
   grid-area: profession;
   margin: 0;
   padding: 0;
@@ -50,8 +51,8 @@
   line-height: 20px;
 }
 
-.biography__paragraph {
-  grid-area: paragraph;
+.about-me__biography-text {
+  grid-area: text;
   margin: 0;
   padding: 26px 0 100px 0;
   font-size: 14px;
@@ -61,7 +62,7 @@
   max-width: 600px;
 }
 
-.biography__link {
+.about-me__biography-link {
   grid-area: link;
   font-size: 14px;
   font-style: normal;
@@ -71,7 +72,7 @@
   opacity: 1;
 }
 
-.biography__photo {
+.about-me__biography-photo {
   grid-area: photo;
   width: 270px;
   height: 327px;
@@ -86,19 +87,19 @@
     padding-right: 50px;
   }
 
-  .biography__name {
+  .about-me__biography-name {
     font-size: 40px;
     line-height: 40px;
     letter-spacing: -1.6px;
   }
 
-  .biography__profession {
+  .about-me__biography-profession {
     padding-top: 16px;
     font-size: 12px;
     line-height: 18px;
   }
 
-  .biography__paragraph {
+  .about-me__biography-text {
     padding-top: 20px;
     padding-bottom: 87px;
     font-size: 12px;
@@ -106,12 +107,12 @@
     max-width: 364px;
   }
 
-  .biography__link {
+  .about-me__biography-link {
     font-size: 14px;
     font-weight: 500;
   }
 
-  .biography__photo {
+  .about-me__biography-photo {
     width: 255px;
     height: 307px;
   }
@@ -132,33 +133,33 @@
     padding-bottom: 28px;
   }
 
-  .biography {
+  .about-me__biography {
     padding-top: 60px;
     display: flex;
     flex-direction: column;
   }
 
-  .biography__name {
+  .about-me__biography-name {
     padding-top: 40px;
     font-size: 30px;
     line-height: normal;
     letter-spacing: -1.2px;
   }
 
-  .biography__profession {
+  .about-me__biography-profession {
     padding-top: 19px;
     font-size: 11px;
     line-height: 16px;
   }
 
-  .biography__paragraph {
+  .about-me__biography-text {
     padding-top: 20px;
     padding-bottom: 40px;
     font-size: 11px;
     line-height: 16px;
   }
 
-  .biography__photo {
+  .about-me__biography-photo {
     margin-left: auto;
     margin-right: auto;
     width: 292px;
