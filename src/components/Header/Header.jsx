@@ -18,25 +18,25 @@ function Header({ loggedIn }) {
     location.pathname === '/profile' ?
     (
       <header className={`header ${!loggedIn ? 'header_theme_blue' : ''}`}>
-        <Link to='/' className="link">
+        <Link to='/' className="header__link link">
           <img src={headerLogo} className="header__logo" alt="Логотип проекта Movies Explorer" />
         </Link>
-      {loggedIn
-       ? <>
-         <Navigation isNavigationOpen={isNavigationOpen}/>
-         <button className={`header__side-menu ${isNavigationOpen && "header__side-menu_opened"}`}
-                 onClick={handleClickOnHamburger}/>
-       </>
-       : <ul className="header__authorized-user">
-         <li>
-           <NavLink className="header__link header__link_register link" to="/signup">Регистрация</NavLink>
-         </li>
-         <li>
-           <NavLink className="header__link header__link_login link" to="/signin">Войти</NavLink>
-         </li>
-       </ul>
-      }
-    </header>
+        {loggedIn
+          ? <>
+            <Navigation isNavigationOpen={isNavigationOpen} />
+            <button className={`header__side-menu ${isNavigationOpen && "header__side-menu_opened"}`}
+                    onClick={handleClickOnHamburger}/>
+          </>
+          : <ul className="header__authorized-user">
+              <li>
+                <NavLink className="header__link header__link_register link" to="/signup">Регистрация</NavLink>
+              </li>
+              <li>
+                <NavLink className="header__link header__link_login link" to="/signin">Войти</NavLink>
+            </li>
+          </ul>
+        }
+      </header>
     )
     :
     (

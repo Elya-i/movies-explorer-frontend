@@ -1,4 +1,4 @@
-.promo__navigation {
+.nav-tab {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,18 +8,18 @@
   width: 100%;
 }
 
-.promo__navigation-list{
+.nav-tab__list {
   display: flex;
   list-style-type: none;
   margin: 0;
   padding-left: 0;
 }
 
-.promo__navigation-list li:last-of-type .promo__link { 
+.nav-tab__list li:last-of-type .nav-tab__link { 
   margin-right: 0;
 }
 
-.promo__link {
+.nav-tab__link {
   margin-right: 40px;
   font-size: 13px;
   line-height: 16px;

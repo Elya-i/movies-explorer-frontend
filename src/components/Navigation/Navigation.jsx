@@ -5,21 +5,18 @@ import profileIcon from "../../images/profile-icon.svg";
 
 function Navigation({ isNavigationOpen }) {
   return (
-    <div className={`navigation ${isNavigationOpen && "navigation_opened"}`}>
+    <nav className={`navigation ${isNavigationOpen && "navigation_opened"}`}>
       <ul className={`navigation__list ${isNavigationOpen && "navigation__list_opened"}`}>
         <li className="navigation__item navigation__item_sidebar">
-          <NavLink className="navigation__link"
-                   activeClassName="navigation__link_active"
+          <NavLink className="navigation__link navigation__link_active"
                    to="/">Главная</NavLink>
         </li>
         <li>
-          <NavLink className="navigation__link"
-                   activeClassName="navigation__link_active"
+          <NavLink className="navigation__link navigation__link_active"
                    to="/movies">Фильмы</NavLink>
         </li>
         <li>
-          <NavLink className="navigation__link"
-                   activeClassName="navigation__link_active"
+          <NavLink className="navigation__link navigation__link_active"
                    to="/saved-movies">Сохраненные фильмы</NavLink>
         </li>
         <li className="navigation__item navigation__item_type_profile">
@@ -29,7 +26,7 @@ function Navigation({ isNavigationOpen }) {
           </NavLink>
         </li>
       </ul>
-    </div>
+    </nav>
   );
 }
 
