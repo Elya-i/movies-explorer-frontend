@@ -4,20 +4,39 @@ import { NavLink } from "react-router-dom";
 import profileIcon from "../../images/profile-icon.svg";
 
 function Navigation({ isNavigationOpen }) {
+
   return (
     <nav className={`navigation ${isNavigationOpen && "navigation_opened"}`}>
       <ul className={`navigation__list ${isNavigationOpen && "navigation__list_opened"}`}>
         <li className="navigation__item navigation__item_sidebar">
-          <NavLink className="navigation__link navigation__link_active"
-                   to="/">Главная</NavLink>
+        <NavLink 
+            to="/" 
+            className={({ isActive }) => 
+              isActive ? `navigation__link navigation__link_active` : `navigation__link` 
+            }
+          >
+          Главная
+        </NavLink>
         </li>
         <li>
-          <NavLink className="navigation__link navigation__link_active"
-                   to="/movies">Фильмы</NavLink>
+          <NavLink 
+            to="/movies" 
+            className={({ isActive }) => 
+              isActive ? `navigation__link navigation__link_active` : `navigation__link` 
+            }
+          >
+          Фильмы
+        </NavLink>
         </li>
         <li>
-          <NavLink className="navigation__link navigation__link_active"
-                   to="/saved-movies">Сохраненные фильмы</NavLink>
+        <NavLink 
+            to="/saved-movies" 
+            className={({ isActive }) => 
+              isActive ? `navigation__link navigation__link_active` : `navigation__link` 
+            }
+          >
+          Сохранённые фильмы
+        </NavLink>
         </li>
         <li className="navigation__item navigation__item_type_profile">
           <NavLink className="navigation__link navigation__link_type_profile" to="/profile">
