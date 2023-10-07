@@ -26,7 +26,7 @@
 }
 
 .navigation__link {
-  font-size: 13px;
+  font-size: 18px;
   font-weight: normal;
   line-height: 18px;
   transition: opacity ease-in-out .2s;
@@ -39,7 +39,10 @@
 }
 
 .navigation__link_active {
+  font-size: 18px;
   font-weight: 500;
+  line-height: 22px;
+  color: #fff;
 }
 
 .navigation__item_type_profile {
