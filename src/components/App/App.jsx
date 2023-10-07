@@ -33,8 +33,6 @@ function App() {
     location.pathname === '/' ? setLoggedIn(false) : setLoggedIn(true)
   })
 
-  const {pathname} = useLocation();
-
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
