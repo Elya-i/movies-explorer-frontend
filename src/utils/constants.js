@@ -11,6 +11,8 @@ import movie10 from "../images/movie_pic_10.png";
 import movie11 from "../images/movie_pic_11.png";
 import movie12 from "../images/movie_pic_12.png";
 
+export const MAIN_API_URL = 'https://api.movies-explorer.ei.nomoredomainsrocks.ru';
+export const MOVIES_API_URL = 'https://api.nomoreparties.co/beatfilm-movies.';
 
 export const movies = [
   {
@@ -122,3 +124,16 @@ export const movies = [
     saved: true,
   },
 ];
+
+export const REGISTRATION_ERRORS_TEXTS = {
+  CONFLICT_EMAIL: 'Пользователь с таким email уже существует.',
+  BAD_REQUEST: 'При регистрации пользователя произошла ошибка.',
+};
+
+
+export const LOGIN_ERRORS_TEXTS = {
+  BAD_REQUEST: 'Вы ввели неправильный логин или пароль.',
+  TOKEN_BAD_REQUEST: 'При авторизации произошла ошибка. Токен не передан или передан не в том формате.',
+  TOKEN_UNAUTHORIZED: 'При авторизации произошла ошибка. Переданный токен некорректен.',
+  INTERNAL_SERVER: '500 На сервере произошла ошибка.',
+};

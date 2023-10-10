@@ -1,7 +1,6 @@
 import React from 'react';
 import './Promo.css'
 import promoLogo from "../../../images/promo-logo.svg";
-import NavTab from '../NavTab/NavTab';
 
 function Promo() {
   return (
