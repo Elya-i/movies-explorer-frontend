@@ -14,6 +14,8 @@ import movie12 from "../images/movie_pic_12.png";
 export const MAIN_API_URL = 'https://api.movies-explorer.ei.nomoredomainsrocks.ru';
 export const MOVIES_API_URL = 'https://api.nomoreparties.co/beatfilm-movies.';
 
+export const regEmail = /^[\w]+@[a-zA-Z]+\.[a-zA-Z]{2,30}$/
+
 export const movies = [
   {
     id: 1,

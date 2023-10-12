@@ -13,7 +13,7 @@ import validation from "./validation";
   };
 
   function handleChange(event) {
-    const {target} = event;
+    const { target } = event;
     const { name, value } = target;
     const error = validation(name, value);
     setErrors(validation(name, value));
@@ -32,7 +32,7 @@ import validation from "./validation";
   )
 
   return {
-    values, errors, isValid, handleChange, resetValidation, onFocus, isFocused,
+    values, setValues, errors, isValid, handleChange, resetValidation, onFocus, isFocused,
  };
 }
 

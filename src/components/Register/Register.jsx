@@ -38,7 +38,7 @@ function Register({ onRegister, registrationError }) {
             linkText: "Войти",
           }}
           registrationError={registrationError}
-          onSubmit={handleSubmit}
+          handleSubmit={handleSubmit}
           validation={formValidation}
           formName="register"
         >

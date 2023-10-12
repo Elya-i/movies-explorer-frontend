@@ -6,13 +6,13 @@ import headerLogo from '../../images/header-logo.svg';
 
 import useFormValidation from '../../hooks/useFormValidation';
 
-function Login( {handleLogin, loginError }) {
+function Login({ onLogin, loginError }) {
   const formValidation = useFormValidation();
   const { email, password } = formValidation.values;
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleLogin(email, password);
+    onLogin(email, password);
     formValidation.resetValidation();
   };
 
@@ -20,7 +20,7 @@ function Login( {handleLogin, loginError }) {
     <section className="login">
       <div className="login__container">
         <Link className="login__link" to="/">
-          <img src={headerLogo} className="authorization__logo" alt="Логотип проекта Movies Explorer" />
+          <img src={headerLogo} className="login__logo" alt="Логотип проекта Movies Explorer" />
         </Link>
         <h1 className="login__title">Рады видеть!</h1>
         <Form
@@ -30,7 +30,7 @@ function Login( {handleLogin, loginError }) {
             route: "/signup",
             linkText: "Регистрация",
           }}
-          onSubmit={handleSubmit}
+          handleSubmit={handleSubmit}
           validation={formValidation}
           formName="login"
           loginError={loginError}

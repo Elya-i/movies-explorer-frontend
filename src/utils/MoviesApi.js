@@ -15,16 +15,16 @@ class MoviesApi {
     }
   };
 
- 
   getMoviesCardList() {
-    return fetch(`${this._url}/movies`, {
+    return fetch(`${this._url}`, {
       headers: this._headers,
       credentials: 'include',
-    })
-    .then((response) => this._checkRequestResult(response));
+    }).then(this._checkServerResponse);
   }
 }
 
-const moviesApi = new MoviesApi (MOVIES_API_URL)
+const moviesApi = new MoviesApi ({
+  url: MOVIES_API_URL,
+});
 
 export default moviesApi;

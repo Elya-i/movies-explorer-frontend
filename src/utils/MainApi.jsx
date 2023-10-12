@@ -1,4 +1,4 @@
-// import { MAIN_API_URL } from './constants';
+import { MAIN_API_URL } from './constants';
 
 class MainApi {
   constructor({ url, headers} ) {
@@ -6,7 +6,7 @@ class MainApi {
     this._headers = headers;
   }
 
-  _checkServerResponse = (response) => {
+  _checkServerResponse(response) {
     if (response.ok) {
       return response.json();
     }
@@ -15,39 +15,29 @@ class MainApi {
     }
   };
 
-  register (name, email, password) {
+  register (email, password, name) {
     return fetch(`${this._url}/signup`, {
       method: 'POST',
       credentials: 'include',
-      headers: this._headers,
-      body: JSON.stringify({name, email, password})
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password, name })
     })
-    .then(this.__checkServerResponse);
+    .then(this._checkServerResponse);
   };
 
-  login (email, password) {
+  login(email, password) {
     return fetch(`${this._url}/signin`, {
-      method: 'POST',
+      method: "POST",
       credentials: 'include',
-      headers: this._headers,
-      body: JSON.stringify({ email, password })
-    })
-    .then(this.__checkServerResponse)
-    .then((data) => {
-      if (data.token) {
-        localStorage.setItem("jwt", data.token);
-        this.updateHeaders();
-        return data;
-      }
-      return Promise.reject(new Error(`Возникла ошибка: ${data.status}`));
-    });
-  }
-
-  updateHeaders() {
-    this._headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-    };
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    }).then(this._checkServerResponse)
   }
 
   logout() {
@@ -56,42 +46,54 @@ class MainApi {
       credentials: 'include',
       headers: this._headers,
     })
-    .then(this.__checkServerResponse);
+    .then(this._checkServerResponse);
   }
 
-  getUserData() {
+  getUserData(token) {
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
       credentials: 'include',
-      headers: this._headers
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
     })
-    .then(this.__checkServerResponse);
+    .then(this._checkServerResponse);
   };
   
-  updateUserData(email, name) {
+  updateUserData(name, email) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       credentials: 'include',
-      headers: this._headers,
-      body: JSON.stringify({ email, name })
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email })
     })
-    .then(this.__checkServerResponse);
+    .then(this._checkServerResponse);
   };
 
   getSavedMovies(){
     return fetch(`${this._url}movies`, {
       method: 'GET',
       credentials: 'include',
-      headers: this._headers
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-Type': 'application/json',
+      },
     })
-    .then(this.__checkServerResponse);
+    .then(this._checkServerResponse);
   };
   
   createMovie(movie) {
     return fetch(`${this._url}/movies`, {
       method: 'POST',
       credentials: 'include',
-      headers: this._headers,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
         country: movie.country, 
         director: movie.director,
@@ -106,25 +108,24 @@ class MainApi {
         nameEN: movie.nameEN
       })
     })
-    .then(this.__checkServerResponse);
+    .then(this._checkServerResponse);
   };
   
   deleteMovie(movieId) {
     return fetch(`${this._url}/movies/${movieId}`, {
       method: 'DELETE',
       credentials: 'include',
-      headers: this._headers,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-Type': 'application/json',
+      },
     })
-    .then(this.__checkServerResponse);
+    .then(this._checkServerResponse);
   }
 }
 
 const mainApi = new MainApi ({
-  url: 'https://api.movies-explorer.ei.nomoredomainsrocks.ru',
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-  }
+  url: MAIN_API_URL,
 });
 
 export default mainApi;
