@@ -1,72 +1,53 @@
-import React from "react";
-import "./MoviesCard.css";
-import { useLocation } from "react-router-dom";
+import React, {useContext} from 'react';
+import './MoviesCard.css';
+import {MOVIES_API_URL} from '../../../utils/constants.js';
+import { MoviesContext } from '../../../contexts/MoviesContext';
 
-// function MoviesCard({ movie, isSaved, onSaveClick, onDeleteClick }) {
+function MoviesCard({ card, onLike, onDislike, buttonType }) {
+  const { id, nameRU, nameEN, duration, image, trailerLink } = card;
+  const { savedMovies } = useContext(MoviesContext);
 
-//   const location = useLocation();
+  const convertedDuration = (() => {
+    const hours = Math.floor(duration / 60);
+    const minutes = duration - hours * 60;
+    return `${hours}ч ${minutes}м`;
+  })();
 
-//   const card = {
-//     nameRU: movie.nameRU,
-//     duration: movie.duration,
-//     image: movie.image.url ? `https://api.nomoreparties.co/${movie.image.url}` : movie.image,
-//     trailerLink: movie.trailerLink
-//   };
+  const savedMovie = savedMovies.find(
+    (savedMovie) => savedMovie.movieId === id
+  );
+  const isLiked = (() => (savedMovie ? true : false))();
 
-//   function handleSaveButton() {
-//     onSaveClick(movie)
-//   }
+  const handleLikeMovie = () =>
+    isLiked ? onDislike(savedMovie) : onLike(card);
 
-//   function handleDeleteButton() {
-//     onDeleteClick(movie)
-//   }
+  const handleDislikeMovie = () => onDislike(card);
 
-//   return (
-//     <li className="card">
-//      <a href={card.trailerLink} className="card__link link" target="_blank" rel="noreferrer">
-//         <img className="card__image" src={card.image} alt={`Изображение филма ${card.nameRU}`} />
-//       </a>  
-//       <div className="card__information">
-//         <p className="card__title">{card.nameRU}</p>
-//         {location.pathname === "/movies" &&
-//           isSaved(movie) ?
-//           <button className={"card__like-button button card__like-button_active button"}
-//             type="button" onClick={handleDeleteButton} />
-//           : 
-//           <button className={"card__like-button button"}
-//             type="button" onClick={handleSaveButton} />
-//         }
-//         {location.pathname === "/saved-movies" &&
-//           <button className="card__delete-button button"
-//             type="button" onClick={handleDeleteButton}/>
-//         }
-//         <p className="card__time">{Math.floor(card.duration / 60)}ч {card.duration - 60 * Math.floor(card.duration / 60)}м</p>
-//       </div>
-//     </li>
-//   );
-// }
+  const favoriteMovieButtonClass = `card__like-button ${isLiked ? 'card__like-button_active button' : ''}`;
+  const removeFavoriteMovieButtonClass = 'card__delete-button button';
 
-// export default MoviesCard;
-
-function MoviesCard({ data }) {
-  const { nameRU, duration, image, id, isAdded, onClick } = data;
-  const { pathname } = useLocation();
-  function handleClick(event) {
-    onClick(console.log('like'));
+  let cardButton;
+  if (buttonType === "dislike") {
+    cardButton = (
+      <button className={removeFavoriteMovieButtonClass} onClick={handleDislikeMovie}></button>
+    );
+  } else if (buttonType === "like") {
+    cardButton = (
+      <button className={favoriteMovieButtonClass} onClick={handleLikeMovie}></button>
+    );
   }
+
   return (
-    <div className="card">
-     <img src={image.url} className="card__image" alt="Изображение фильма" />
+    <li className="card">
+      <a href={trailerLink} className="card__link link" target="_blank" rel="noreferrer">
+        <img src={image.url ? MOVIES_API_URL + image.url : image} className="card__image" alt={`Изображение фильма ${card.nameRU || card.nameEN}`} />
+      </a>  
       <div className="card__information">
-        <p className="card__title">{nameRU}</p>
-        <button
-          className={pathname === "/movies" ?
-            `card__like-button button ${isAdded ? "card__like-button_active button" : ""}`
-            : "card__delete-button button"}
-          onClick={handleClick}/>
-        <p className="card__time">{`${duration}`}</p>
+        <h2 className="card__title">{nameRU || nameEN}</h2>
+        {cardButton}
+        <p className="card__time">{convertedDuration}</p>
       </div>
-    </div>
+    </li>
   );
 }
 

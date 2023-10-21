@@ -30,10 +30,11 @@
   line-height: 19px;
 }
 
-.not-found__link {
+.not-found__button {
   margin: 0;
   padding: 184px 0 0;
   color: #4285F4;
+  background-color: transparent;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -63,7 +64,7 @@
     line-height: 15px;
   }
 
-  .not-found__link {
+  .not-found__button {
     padding-top: 284px;
     font-size: 12px;
     line-height: 15px;

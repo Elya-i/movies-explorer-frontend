@@ -1,141 +1,26 @@
-import movie1 from "../images/movie_pic_1.png"
-import movie2 from "../images/movie_pic_2.png";
-import movie3 from "../images/movie_pic_3.png";
-import movie4 from "../images/movie_pic_4.png";
-import movie5 from "../images/movie_pic_5.png";
-import movie6 from "../images/movie_pic_6.png";
-import movie7 from "../images/movie_pic_7.png";
-import movie8 from "../images/movie_pic_8.png";
-import movie9 from "../images/movie_pic_9.png";
-import movie10 from "../images/movie_pic_10.png";
-import movie11 from "../images/movie_pic_11.png";
-import movie12 from "../images/movie_pic_12.png";
-
 export const MAIN_API_URL = 'https://api.movies-explorer.ei.nomoredomainsrocks.ru';
-export const MOVIES_API_URL = 'https://api.nomoreparties.co/beatfilm-movies.';
+export const MOVIES_API_URL = 'https://api.nomoreparties.co';
 
-export const regEmail = /^[\w]+@[a-zA-Z]+\.[a-zA-Z]{2,30}$/
+export const REG_EXP_USER_NAME = "^[A-Za-zА-Яа-яЁё\\-\\s]+$";
 
-export const movies = [
-  {
-    id: 1,
-    nameRU: "33 слова о дизайне",
-    duration: '1ч 47м',
-    image: {
-      url: movie1,
-    },
-    saved: false,
-  },
-  {
-    id: 2,
-    nameRU: "Киноальманах «100 лет дизайна»",
-    duration: '1ч 3м',
-    image: {
-      url: movie2,
-    },
-    saved: false,
-  },
-  {
-    id: 3,
-    nameRU: "В погоне за Бенкси",
-    duration: '1ч 42м',
-    image: {
-      url: movie3,
-    },
-    saved: true,
-  },
-  {
-    id: 4,
-    nameRU: "Баския: Взрыв реальности",
-    duration: '1ч 21м',
-    image: {
-      url: movie4,
-    },
-    saved: true,
-  },
-  {
-    id: 5,
-    nameRU: "Бег это свобода",
-    duration: '1ч 44м',
-    image: {
-      url: movie5,
-    },
-    saved: true,
-  },
-  {
-    id: 6,
-    nameRU: "Книготорговцы",
-    duration: '1ч 37м',
-    image: {
-      url: movie6,
-    },
-    saved: true,
-  },
-  {
-    id: 7,
-    nameRU: "Когда я думаю о Германии ночью",
-    duration: '1ч 56м',
-    image: {
-      url: movie7,
-    },
-    saved: true,
-  },
-  {
-    id: 8,
-    nameRU: "Gimme Danger: История Игги и The Stooge...",
-    duration: '1ч 59м',
-    image: {
-      url: movie8,
-    },
-    saved: true,
-  },
-  {
-    id: 9,
-    nameRU: "Дженис: Маленькая девочка грустит",
-    duration: '1ч 42м',
-    image: {
-      url: movie9,
-    },
-    saved: true,
-  },
-  {
-    id: 10,
-    nameRU: "Соберись перед прыжком",
-    duration: '1ч 10м',
-    image: {
-      url: movie10,
-    },
-    saved: true,
-  },
-  {
-    id: 11,
-    nameRU: "Пи Джей Харви: A dog called money",
-    duration: '1ч 4м',
-    image: {
-      url: movie11,
-    },
-    saved: true,
-  },
-  {
-    id: 12,
-    nameRU: "По волнам: Искусство звука в кино",
-    duration: '1ч 7м',
-    image: {
-      url: movie12,
-    },
-    saved: true,
-  },
-];
+export const INITIAL_CARDS_QUANTITY_DESKTOP = 12;
+export const INITIAL_CARDS_QUANTITY_TABLET = 8;
+export const INITIAL_CARDS_QUANTITY_MOBILE = 5;
+export const ADDED_CARDS_QUANTITY_DESKTOP = 3;
+export const ADDED_CARDS_QUANTITY_TABLET = 2;
+export const ADDED_CARDS_QUANTITY_MOBILE = 2;
 
-export const REGISTRATION_ERRORS_TEXTS = {
-  CONFLICT_EMAIL: 'Пользователь с таким email уже существует.',
-  BAD_REQUEST: 'При регистрации пользователя произошла ошибка.',
-};
+export const SCREEN_S = 750;
+export const SCREEN_M = 1278;
+export const SCREEN_L = 1280;
 
+export const SHORT_MOVIE_DURATION = 40;
 
-export const LOGIN_ERRORS_TEXTS = {
-  BAD_REQUEST: 'Вы ввели неправильный логин или пароль.',
-  TOKEN_BAD_REQUEST: 'При авторизации произошла ошибка. Токен не передан или передан не в том формате.',
-  TOKEN_UNAUTHORIZED: 'При авторизации произошла ошибка. Переданный токен некорректен.',
-  INTERNAL_SERVER: '500 На сервере произошла ошибка.',
-};
+export const DEBOUNCE_TIME_MS = 500;
+export const DESKTOP_RESOLUTION = 972;
+export const TABLET_RESOLUTION = 636;
+export const MOBILE_RESOLUTION = 635;
+
+export const HTTP_STATUS_UNAUTHORIZED = 401;
+export const HTTP_STATUS_CONFLICT = 409;
+export const HTTP_STATUS_INTERNAL_SERVER_ERROR = 500;

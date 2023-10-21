@@ -1,8 +1,8 @@
 import { MOVIES_API_URL } from './constants';
 
 class MoviesApi {
-  constructor(url) {
-    this._url = url;
+  constructor() {
+    this._url = MOVIES_API_URL;
     this._headers = { 'Content-type': 'application/json' };
   }
 
@@ -11,20 +11,15 @@ class MoviesApi {
       return response.json();
     }
     else {
-      return Promise.reject(new Error(`Возникла ошибка: ${response.status}`));
+      return Promise.reject(`Возникла ошибка: ${response.status}`);
     }
   };
 
-  getMoviesCardList() {
-    return fetch(`${this._url}`, {
+  getMovies() {
+    return fetch(`${MOVIES_API_URL}/beatfilm-movies`, {
       headers: this._headers,
-      credentials: 'include',
     }).then(this._checkServerResponse);
   }
 }
 
-const moviesApi = new MoviesApi ({
-  url: MOVIES_API_URL,
-});
-
-export default moviesApi;
+export const moviesApi = new MoviesApi( MOVIES_API_URL);

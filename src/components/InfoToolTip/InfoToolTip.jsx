@@ -1,10 +1,11 @@
 import React from 'react';
 import { useCallback, useEffect } from "react";
-import './InfoToolTip.css'
 import successIcon from '../../images/success.svg';
 import failIcon from '../../images/fail.svg';
+import './InfoTooltip.css';
 
-const InfoToolTip = ({ infoToolTip, onClose }) => {
+
+function InfoTooltip({ infoTooltip, onClose }) {
   const handleCloseByEsc = useCallback(
     (event) => {
       if (event.key === "Escape") {
@@ -21,7 +22,7 @@ const InfoToolTip = ({ infoToolTip, onClose }) => {
     };
   }, [handleCloseByEsc]);
 
-  const { success, message, isOpen } = infoToolTip;
+  const { success, message, isOpen } = infoTooltip;
 
   return (
     <div className={`popup ${isOpen && "popup_opened"}`}>
@@ -30,7 +31,7 @@ const InfoToolTip = ({ infoToolTip, onClose }) => {
           onClick={onClose}
           aria-label="Закрыть"
           type="button"
-          className="popup__close-btn">
+          className="popup__close-button">
         </button>
         <img
           src={success ? successIcon : failIcon}
@@ -43,4 +44,4 @@ const InfoToolTip = ({ infoToolTip, onClose }) => {
   );
 };
 
-export default InfoToolTip;
+export default InfoTooltip;

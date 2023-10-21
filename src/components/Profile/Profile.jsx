@@ -1,106 +1,151 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './Profile.css';
-import useFormValidation from '../../hooks/useFormValidation';
+import AuthTitle from "../AuthTitle/AuthTitle";
+import Form from '../Form /Form';
+import useFormWithValidation from '../../hooks/useFormWithValidation';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Profile({
-  handleLogout,
-  onUpdateUser,
-  isUpdateError,
-  isUpdateComplete
- }) {
+import { REG_EXP_USER_NAME } from '../../utils/constants';
+
+function Profile({ onUpdateUser, onLogout, onLoading }) {
 
   const currentUser = useContext(CurrentUserContext);
-  const formValidation = useFormValidation();
-  const { name, email } = formValidation.values;
+  const [isUpdatedUser, setUpdatedUser] = useState(true);
+  const [isModifying, setModifying] = useState(false);
+  const { values, errors, isFormValid, onChange, resetValidation } =
+    useFormWithValidation();
 
   useEffect(() => {
-    formValidation.setValues({
-      name: currentUser.name,
-      email: currentUser.email,
-    });
-  }, []);
+    currentUser.name !== values.name || currentUser.email !== values.email
+      ? setUpdatedUser(false)
+      : setUpdatedUser(true);
+  }, [currentUser, values]);
 
-  console.log({name});
+  useEffect(() => {
+    resetValidation(false, currentUser);
+  }, [resetValidation, currentUser]);
 
-  const submitEditProfile = (event) => {
+  function handleEditClick() {
+    setModifying(!isModifying);
+  }
+
+  function handleSubmit(event) {
     event.preventDefault();
-    onUpdateUser(name, email);
-  };
+    onUpdateUser(values);
+  }
 
   return (
-      <section className="profile">
-        <div className="profile__container">
-          <h1 className="profile__title">
-            Привет, {currentUser && currentUser.name}
-            !
-          </h1>
-          <form
-            noValidate
-            onSubmit={submitEditProfile}
-            className="profile__form"
-            name="edit-form"
+    <main className="profile">
+      <section className="profile__container">
+        <AuthTitle
+          title={`Привет, ${currentUser.name || ""}!`}
+          reference="profile"
+        />
+        <Form
+          name="profile"
+          onSubmit={handleSubmit}
+          isFormValid={isFormValid}
+          isUpdatedUser={isUpdatedUser}
+          buttonText={onLoading ? "Сохранение..." : "Сохранить"}
+          isModifying={isModifying}
+        >
+          <label className="form__input-container form__input-container_type_profile">
+            Имя
+            <input
+              className={`form__input form__input_type_profile ${
+                errors.name ? "form__input_incorrect" : ""
+              }`}
+              type="text"
+              name="name"
+              form="profile"
+              required
+              minLength="2"
+              maxLength="30"
+              pattern={REG_EXP_USER_NAME}
+              id="name-input"
+              disabled={isModifying && !onLoading ? false : true}
+              onChange={onChange}
+              value={values.name || ""}
+            />
+          </label>
+          <label className="form__input-container form__input-container_type_profile">
+            E-mail
+            <input
+              className={`form__input form__input_type_profile ${
+                errors.email ? "form__input_incorrect" : ""
+              }`}
+              type="text"
+              name="email"
+              form="profile"
+              required
+              id="email-input"
+              disabled={isModifying && !onLoading ? false : true}
+              onChange={onChange}
+              value={values.email || ""}
+            />
+          </label>
+          <div
+            className={`form__errors-container ${
+              errors.name || errors.email ? "form__errors-container_active" : ""
+            }`}
           >
-            <label className="profile__label" htmlFor="name">
-              Имя
-              <input 
-                autoComplete="off"
-                id="name"
-                type="text"
-                onChange={formValidation.handleChange}
-                value={name || ""}
-                required
-                minLength="2"
-                maxLength="30"
-                className="profile__input"
-                name="name"
-              />
-            </label>
-            <label className="profile__label" htmlFor="email">
-              Почта
-              <input
-                autoComplete="off"
-                id="email"
-                type="email"
-                onChange={formValidation.handleChange}
-                value={email || ""}
-                required
-                className="profile__input"
-                name="email"
-              />
-            </label>
-            <p className="profile__form-error">
-              {formValidation.errors.name ||
-                formValidation.errors.email}
-            </p>
-            {isUpdateError && (
-              <p className="profile__form-error">Ошибка обновления данных</p>
-            )}
-            {isUpdateComplete && (
-              <p className="profile__form-complete">Данные успешно обновлены</p>
-            )}
-            <button
-              className="profile__button-edit button"
-              type="submit"
-              disabled={
-                (currentUser &&
-                  name === currentUser.name &&
-                  email === currentUser.email) ||
-                !formValidation.isValid
-              }
-            >
-              Редактировать
-            </button>
-            <button
-              onClick={handleLogout}
-              className="profile__button-logout button"
-              type="button"
-            >
-              Выйти из аккаунта
-            </button>
-          </form>
+            <div className="form__error-container">
+              <p
+                className={`form__error-name ${
+                  errors.name ? "form__error-name_active" : ""
+                }`}
+              >
+                Имя:
+              </p>
+              <span
+                className={`form__input-error form__input-error_type_profile ${
+                  errors.name ? "form__input-error_active" : ""
+                }`}
+              >
+                {errors.name || ""}
+              </span>
+            </div>
+            <div className="form__error-container">
+              <p
+                className={`form__error-name ${
+                  errors.email ? "form__error-name_active" : ""
+                }`}
+              >
+                E-mail:
+              </p>
+              <span
+                className={`form__input-error form__input-error_type_profile ${
+                  errors.email ? "form__input-error_active" : ""
+                }`}
+              >
+                {errors.email || ""}
+              </span>
+            </div>
+          </div>
+        </Form>
+        <div
+          className={`profile__edit ${
+            isModifying ? "profile__edit_hidden" : ""
+          }`}
+        >
+          <button
+            className="profile__button profile__button_type_edit link"
+            type="button"
+            onClick={handleEditClick}
+          >
+            Редактировать
+          </button>
+          <button
+            className="profile__button profile__button_type_logout link"
+            type="button"
+            onClick={onLogout}
+          >
+            Выйти из аккаунта
+          </button>
         </div>
       </section>
-  )}
+    </main>
+  );
+}
 
 export default Profile;

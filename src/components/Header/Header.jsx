@@ -12,10 +12,10 @@ function Header({ loggedIn }) {
   };
   const location = useLocation();
 
-  return location.pathname === '/' || 
-    location.pathname === '/movies' || 
-    location.pathname === '/saved-movies'|| 
-    location.pathname === '/profile' ?
+  return location.pathname === '/' 
+  || location.pathname === '/movies' 
+  || location.pathname === '/saved-movies'
+  || location.pathname === '/profile' ?
     (
       <header className={`header ${!loggedIn ? 'header_theme_blue' : ''}`}>
         <Link to='/' className="header__link link">
@@ -39,11 +39,7 @@ function Header({ loggedIn }) {
       </header>
     )
     :
-    (
-    <>
-    </>
-    );
-
+    (<></>);
 }
 
 export default Header;

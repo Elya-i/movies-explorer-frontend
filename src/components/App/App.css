@@ -1,5 +1,5 @@
 .page {
-  max-width: 1600px;
+  /* max-width: 1600px; */
   margin: 0 auto;
   min-width: 320px;
   min-height: 100vh;
@@ -21,7 +21,7 @@
   width: 100%;
 }
 
-.page__container_blue {
+.page_theme_blue {
   background-color: #073042;
 }
 
