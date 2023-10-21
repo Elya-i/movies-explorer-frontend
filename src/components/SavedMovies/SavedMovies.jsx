@@ -23,6 +23,7 @@ const SavedMovies = ({ onDislike, onSearch }) => {
       setSavedMoviesKeyword("");
       setSavedMoviesIsShort(false);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const moviesCardElements = filteredSavedMovies.map((card) => (

@@ -68,10 +68,15 @@ function App() {
           setCurrentUser((prev) => ({...prev, name: name, email: email}))
           setLoggedIn(true);
         })
-        .catch((error) => (error))
+        .catch((error) => {
+          console.error(error);
+        })
         .finally(() => setPreloaderActive(false))
+        } else {
+          setPreloaderActive(false)
+        }
     }
-  }
+    
     
   function handleClosePopup() {
     setInfoTooltip({ ...infoTooltip, isOpen: false });

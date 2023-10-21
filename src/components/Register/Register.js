@@ -82,6 +82,7 @@ function Register({ onRegister, onLoading, loggedIn }) {
             name="password"
             form="register"
             required
+            autoComplete="off"
             placeholder="Введите пароль"
             minLength="6"
             maxLength="30"

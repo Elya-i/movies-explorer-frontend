@@ -114,10 +114,12 @@ export const MoviesProvider = ({ children }) => {
 
   useEffect(() => {
     filterMovies();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [movies, moviesIsShort]);
 
   useEffect(() => {
     filterSavedMovies();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [savedMovies, savedMoviesIsShort]);
 
   const setMovies = (movies) => {

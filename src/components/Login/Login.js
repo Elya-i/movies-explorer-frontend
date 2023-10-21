@@ -35,6 +35,7 @@ function Login({ onLogin, onLoading, loggedIn }) {
             form="login"
             placeholder="Ввведите email"
             required
+            autoComplete="off"
             minLength="6"
             id="email-input"
             disabled={onLoading ? true : false}

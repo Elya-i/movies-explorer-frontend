@@ -59,6 +59,7 @@ function Profile({ onUpdateUser, onLogout, onLoading }) {
               name="name"
               form="profile"
               required
+              autoComplete="off"
               minLength="2"
               maxLength="30"
               pattern={REG_EXP_USER_NAME}
