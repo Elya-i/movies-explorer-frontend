@@ -1,13 +1,14 @@
 import React from 'react';
 import './SavedMovies.css';
 import { useContext, useEffect } from 'react';
-import SearchForm from '../Movies/SearchForm/SearchForm'
-import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
-import MoviesCard from '../Movies/MoviesCard/MoviesCard';
+import SearchForm from '../SearchForm/SearchForm'
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import MoviesCard from '../MoviesCard/MoviesCard';
 import { MoviesContext } from '../../contexts/MoviesContext';
+import Preloader from '../Preloader/Preloader';
 
 
-const SavedMovies = ({ onDislike, onSearch }) => {
+const SavedMovies = ({ onDislike, onSearch, isLoading }) => {
   const {
     filteredSavedMovies,
     savedMoviesKeyword,
@@ -15,6 +16,7 @@ const SavedMovies = ({ onDislike, onSearch }) => {
     savedMoviesIsShort,
     setSavedMoviesIsShort,
     filterSavedMovies,
+    moviesIsSearched,
   } = useContext(MoviesContext);
 
   useEffect(() => {
@@ -35,6 +37,14 @@ const SavedMovies = ({ onDislike, onSearch }) => {
     />
   ));
 
+  const cardsMessage = (() => {
+    if (!moviesIsSearched) {
+      return <p></p>;
+    } else if (!isLoading && moviesCardElements.length === 0) {
+      return <p>Ничего не найдено</p>;
+    }
+  })();
+
   return (
       <main className="movies">
         <SearchForm
@@ -44,6 +54,8 @@ const SavedMovies = ({ onDislike, onSearch }) => {
           isShort={savedMoviesIsShort}
           setIsShort={setSavedMoviesIsShort}
         />
+        {isLoading && <Preloader />}
+        {cardsMessage}
         <MoviesCardList moviesCardElements={moviesCardElements} />
       </main>
   );

@@ -2,10 +2,10 @@ import React from 'react';
 import './Movies.css';
 import { MoviesContext } from "../../contexts/MoviesContext";
 import { useState, useContext, useEffect } from 'react';
-import SearchForm from './SearchForm/SearchForm';
+import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
-import MoviesCardList from './MoviesCardList/MoviesCardList';
-import MoviesCard from './MoviesCard/MoviesCard';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import MoviesCard from '../MoviesCard/MoviesCard';
 import { useMediaQuery } from 'react-responsive';
 import {
   INITIAL_CARDS_QUANTITY_DESKTOP,
@@ -79,9 +79,9 @@ function Movies({ onSearch, onLike, onDislike, isLoading }) {
 
   const cardsMessage = (() => {
     if (!moviesIsSearched) {
-      return <p></p>;
+      return <span></span>;
     } else if (!isLoading && moviesCardElements.length === 0) {
-      return <p >Ничего не найдено</p>;
+      return <span>Ничего не найдено</span>;
     }
   })();
 

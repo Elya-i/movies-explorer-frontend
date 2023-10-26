@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./SearchForm.css";
-import FilterCheckbox from "../../FilterCheckbox/FilterCheckbox";
+import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
 
 function SearchForm({ onSubmit, keyword, setKeyword, isShort, setIsShort }) {
@@ -19,7 +19,7 @@ function SearchForm({ onSubmit, keyword, setKeyword, isShort, setIsShort }) {
   return (
     <section className="search">
       <div className="search__container">
-       <form className="search__form" noValidate onSubmit={handleSearch}>
+       <form name="search" className="search__form" noValidate onSubmit={handleSearch}>
           <div className="search__wrap">
             <input 
               className="search__input" 

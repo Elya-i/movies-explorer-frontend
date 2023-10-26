@@ -17,8 +17,7 @@ import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { WindowModeContext } from "../../contexts/WindowModeContext";
-import useWindowSize from '../../hooks/useWindowSize';
+import debounce from 'lodash.debounce';
 
 import { mainApi } from '../../utils/MainApi';
 import { moviesApi } from '../../utils/MoviesApi';
@@ -29,10 +28,15 @@ function App() {
   const [currentUser, setCurrentUser] = useState({ name: '', email: ''});
   const [isLoading, setLoading] = useState(false);
   const [isPreloaderActive, setPreloaderActive] = useState(true);
+  const [isFormDisabled, setIsFormDisabled] = useState(false);
+
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
 
   const {
+    movies,
     setMovies,
     setMoviesIsSearched,
+    filterMovies,
     filterSavedMovies,
     setSavedMovies,
     addMovieToSaved,
@@ -47,10 +51,8 @@ function App() {
     success: false,
   });
 
-  const token = localStorage.getItem('token');
   const moviesState = localStorage.getItem('moviesState');
  
-  const windowSize = useWindowSize();
   const { pathname } = useLocation();
 
   const navigate = useNavigate();
@@ -61,8 +63,8 @@ function App() {
   }, [])
 
   function handleCheckToken() {
-    if (token) {
-      mainApi.authenticate(token)
+    if (localStorage.getItem('isLoggedIn')) {
+      mainApi.authenticate()
       mainApi.getUserData()
         .then(({ name, email }) => {
           setCurrentUser((prev) => ({...prev, name: name, email: email}))
@@ -77,16 +79,15 @@ function App() {
         }
     }
     
-    
   function handleClosePopup() {
     setInfoTooltip({ ...infoTooltip, isOpen: false });
   }
 
   function handleLogin(email, password) {
+    setIsFormDisabled(true)
     return mainApi.login(email, password)
-      .then(({ token }) => {
-        localStorage.setItem('token', token)
-        mainApi.authenticate(token)
+      .then(() => {
+        localStorage.setItem('isLoggedIn', true);
         return mainApi.getUserData()
       })
       .then(({ name, email }) => {
@@ -100,9 +101,18 @@ function App() {
         navigate('/movies', {replace: true});
       })
       .catch((error) => {
+        setIsFormDisabled(false)
         if (error.message === 'Ошибка: 401') {
           setInfoTooltip({
             message: 'Введен неправильный логин или пароль',
+            isOpen: true,
+            success: false,
+          })
+          return false;
+        }
+        if (error.message === 'Ошибка: 400') {
+          setInfoTooltip({
+            message: 'При авторизации пользователя произошла ошибка',
             isOpen: true,
             success: false,
           })
@@ -120,7 +130,7 @@ function App() {
   }
    
   function handleRegistration({ email, password, name }) {
-    setLoading(true)
+    setIsFormDisabled(true)
     return mainApi.register({email, password, name})
       .then((data) => {
         if (data) {
@@ -135,9 +145,18 @@ function App() {
         }
       })
       .catch((error) => {
+        setIsFormDisabled(false)
         if (error.message === 'Ошибка: 409') {
           setInfoTooltip({
             message: 'Пользователь с указанным email уже существует',
+            isOpen: true,
+            success: false,
+          })
+          return false;
+        }
+        if (error.message === 'Ошибка: 400') {
+          setInfoTooltip({
+            message: 'При регистрации пользователя произошла ошибка',
             isOpen: true,
             success: false,
           })
@@ -152,12 +171,11 @@ function App() {
           return false;
         }
       })
-      .finally(() => setLoading(false))
   }
 
   function handleUpdateUser(userData) {
-    setLoading(true);
-    mainApi.updateUserData(userData, token)
+    setIsFormDisabled(true);
+    mainApi.updateUserData(userData)
       .then((updatedUserData) => {
         setCurrentUser(updatedUserData);
         setInfoTooltip({
@@ -167,6 +185,7 @@ function App() {
         });
       })
       .catch((error) => {
+        setIsFormDisabled(false)
         if (error.message === 'Ошибка: 409') {
           setInfoTooltip({
             message: 'Пользователь с указанным email уже существует',
@@ -183,7 +202,6 @@ function App() {
           return false;
         }
       })
-      .finally(() => setLoading(false))
   }
 
   function handleLogout() {
@@ -196,26 +214,51 @@ function App() {
   }
 
   useEffect(() => {
-    if (token)
-    mainApi.getSavedMovies(token)
-      .then((savedMovies) => setSavedMovies(savedMovies))
-      .catch((error) => (error));
-  if (moviesState) {
-    restoreState(moviesState);
+      mainApi.getSavedMovies()
+        .then((savedMovies) => setSavedMovies(savedMovies))
+        .catch((error) => {
+          if (error.message === 'Ошибка: 500') {
+            setInfoTooltip({
+              message: `Во время запроса произошла ошибка. Возможно, 
+              проблема с соединением или сервер недоступен. Подождите 
+              немного и попробуйте ещё раз`,
+              isOpen: true,
+              success: false,
+            })
+            return false;
+          }
+        })
+    if (moviesState) {
+      restoreState(moviesState);
   }
 // eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
 
-  function handleSearchMovies() {
-      setLoading(true);
-      setMoviesIsSearched(true);
-      moviesApi.getMovies()
-        .then((movies) => {
-          setMovies(movies);
-        })
-        .catch((error) => (error))
-        .finally(() => setLoading(false))
+function handleSearchMovies() {
+  if (movies.length === 0) {
+    setMoviesIsSearched(true);
+    setLoading(true);
+    moviesApi.getMovies()
+      .then((movies) => {
+        setMovies(movies);
+      })
+      .catch((error) => {
+        if (error.message === 'Ошибка: 500') {
+          setInfoTooltip({
+            message: `Во время запроса произошла ошибка. Возможно, 
+            проблема с соединением или сервер недоступен. Подождите 
+            немного и попробуйте ещё раз`,
+            isOpen: true,
+            success: false,
+          })
+          return false;
+        }
+      })
+      .finally(() => setLoading(false));
+  } else {
+    filterMovies();
   }
+}
 
   function handleSearchSavedMovies() {
     filterSavedMovies();
@@ -236,24 +279,33 @@ function App() {
         nameRU: card.nameRU,
         nameEN: card.nameEN,
       },
-      token
     )
       .then((movie) => addMovieToSaved(movie))
       .catch((error) => (error));
   }
 
   function handleDislike(savedMovie) {
-    mainApi.deleteMovie(savedMovie._id, token)
+    mainApi.deleteMovie(savedMovie._id)
       .then(() => removeMovieFromSaved(savedMovie))
       .catch((error) => (error));
   }
+
+  const handleResize = debounce(() => {
+    setWindowSize(window.innerWidth);
+  }, 100);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [handleResize]);
 
   return (
     <div className={`page ${pathname === '/' && "page_theme_blue"}`}>
       {isPreloaderActive ? (
         <Preloader />
       ) : (
-        <WindowModeContext.Provider value={windowSize}>
           <CurrentUserContext.Provider value={currentUser}>
             <Header loggedIn={loggedIn} />
             <Routes>
@@ -265,7 +317,8 @@ function App() {
                   onSearch={handleSearchMovies}
                   onLike={handleLike}
                   onDislike={handleDislike}
-                  isLoading={isLoading}  
+                  isLoading={isLoading}
+                  windowSize={windowSize}  
                 />
               }/>
               <Route path="/saved-movies" element={
@@ -273,31 +326,32 @@ function App() {
                   component={SavedMovies} 
                   loggedIn={loggedIn} 
                   onSearch={handleSearchSavedMovies}
-                  onDislike={handleDislike} 
+                  onDislike={handleDislike}
+                  windowSize={windowSize} 
                 />
               }/>    
               <Route path="/profile" element={
                 <ProtectedRoute 
                   component={Profile} 
+                  isFormDisabled={isFormDisabled}
                   loggedIn={loggedIn} 
                   onUpdateUser={handleUpdateUser} 
                   onLogout={handleLogout} 
-                  onLoading={isLoading}
                 />
               }/>
               <Route path="/signup" element={
                 <Register 
+                  isFormDisabled={isFormDisabled}
                   onRegister={handleRegistration} 
                   loggedIn={loggedIn} 
                   success={infoTooltip.success} 
-                  onLoading={isLoading} 
                 />
               }/>
               <Route path="/signin" element={
                 <Login 
+                  isFormDisabled={isFormDisabled}
                   onLogin={handleLogin} 
                   loggedIn={loggedIn} 
-                  onLoading={isLoading}
                 />
               }/>
               <Route path="*" element={<PageNotFound/>} />
@@ -307,7 +361,6 @@ function App() {
               infoTooltip={infoTooltip} />
             <Footer />
           </CurrentUserContext.Provider>
-        </WindowModeContext.Provider>
       )}
     </div>
   );

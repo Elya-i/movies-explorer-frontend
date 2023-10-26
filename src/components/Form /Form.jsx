@@ -5,19 +5,12 @@ function Form({
   name,
   onSubmit,
   isFormValid,
-  isCurrentUser,
+  isFormDisabled,
+  isUserDataChanged,
   buttonText,
   isModifying,
   ...props
 }) {
-
-  function handleButtonDisable() {
-    if (name === "profile") {
-      return isFormValid && !isCurrentUser ? false : true;
-    } else {
-      return isFormValid ? false : true;
-    }
-  }
 
   return (
     <form
@@ -33,14 +26,15 @@ function Form({
         type="submit"
         form={`${name}`}
         className={`form__button-submit form__button-submit_type_${name} ${
-          name === "profile" && !isModifying
+          // eslint-disable-next-line no-sequences
+          name === "login", "register", "profile" && !isModifying 
             ? "form__button-submit_hidden"
-            : ''
-        } button`}
-        disabled={handleButtonDisable()}
+            : 
+            (!isFormValid || isFormDisabled || isUserDataChanged) && "form__button-submit_disabled" }  button`} 
       >
         {buttonText}
       </button>
+      
     </form>
   );
 }

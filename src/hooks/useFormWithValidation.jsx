@@ -40,6 +40,8 @@ function useFormWithValidation() {
     isFormValid,
     onChange,
     resetValidation,
+    setValues,
+    setFormValid
   };
 }
 

@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import './MoviesCard.css';
-import {MOVIES_API_URL} from '../../../utils/constants.js';
-import { MoviesContext } from '../../../contexts/MoviesContext';
+import {MOVIES_API_URL} from '../../utils/constants';
+import { MoviesContext } from '../../contexts/MoviesContext';
 
 function MoviesCard({ card, onLike, onDislike, buttonType }) {
   const { id, nameRU, nameEN, duration, image, trailerLink } = card;

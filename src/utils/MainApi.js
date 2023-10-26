@@ -15,7 +15,7 @@ class MainApi {
     }
   };
 
-  register({email, password, name}) {
+  register({ email, password, name }) {
     return fetch(`${MAIN_API_URL}/signup`, {
       method: 'POST',
       credentials: 'include',
@@ -61,23 +61,21 @@ class MainApi {
     .then(this._checkServerResponse);
   };
 
-  authenticate(token) {
+  authenticate() {
     return fetch(`${MAIN_API_URL}/users/me`, {
       method: 'GET',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
       }
     }).then(this._checkServerResponse);
   };
 
-  updateUserData({ email, name }, token) {
+  updateUserData({ email, name }) {
     return fetch(`${MAIN_API_URL}/users/me`, {
       method: 'PATCH',
       credentials: 'include',
       headers: {
-        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email, name })
@@ -85,12 +83,11 @@ class MainApi {
     .then(this._checkServerResponse);
   };
 
-  getSavedMovies(token){
+  getSavedMovies(){
     return fetch(`${MAIN_API_URL}/movies`, {
       method: 'GET',
       credentials: 'include',
       headers: {
-        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
     })
@@ -98,12 +95,11 @@ class MainApi {
   };
   
 
-  saveMovie(movie, token) {
+  saveMovie(movie) {
     return fetch(`${MAIN_API_URL}/movies`, {
       method: 'POST',
       credentials: 'include',
       headers: {
-        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(movie)
@@ -111,12 +107,11 @@ class MainApi {
     .then(this._checkServerResponse);
   };
   
-  deleteMovie(movieId, token) {
+  deleteMovie(movieId) {
     return fetch(`${MAIN_API_URL}/movies/${movieId}`, {
       method: 'DELETE',
       credentials: 'include',
       headers: {
-        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
     })

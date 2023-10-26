@@ -7,18 +7,18 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 import { REG_EXP_USER_NAME } from '../../utils/constants';
 
-function Profile({ onUpdateUser, onLogout, onLoading }) {
+function Profile({ isFormDisabled, onUpdateUser, onLogout }) {
 
   const currentUser = useContext(CurrentUserContext);
-  const [isUpdatedUser, setUpdatedUser] = useState(true);
+  const [isUserDataChanged, setUserDataChanged] = useState(true);
   const [isModifying, setModifying] = useState(false);
   const { values, errors, isFormValid, onChange, resetValidation } =
     useFormWithValidation();
 
   useEffect(() => {
     currentUser.name !== values.name || currentUser.email !== values.email
-      ? setUpdatedUser(false)
-      : setUpdatedUser(true);
+      ? setUserDataChanged(false)
+      : setUserDataChanged(true);
   }, [currentUser, values]);
 
   useEffect(() => {
@@ -42,11 +42,11 @@ function Profile({ onUpdateUser, onLogout, onLoading }) {
           reference="profile"
         />
         <Form
-          name="profile"
+          name = "profile"
           onSubmit={handleSubmit}
           isFormValid={isFormValid}
-          isUpdatedUser={isUpdatedUser}
-          buttonText={onLoading ? "Сохранение..." : "Сохранить"}
+          isUserDataChanged={isUserDataChanged}
+          buttonText={"Сохранить"}
           isModifying={isModifying}
         >
           <label className="form__input-container form__input-container_type_profile">
@@ -64,7 +64,7 @@ function Profile({ onUpdateUser, onLogout, onLoading }) {
               maxLength="30"
               pattern={REG_EXP_USER_NAME}
               id="name-input"
-              disabled={isModifying && !onLoading ? false : true}
+              disabled={isModifying && !isFormDisabled ? false : true}
               onChange={onChange}
               value={values.name || ""}
             />
@@ -80,7 +80,7 @@ function Profile({ onUpdateUser, onLogout, onLoading }) {
               form="profile"
               required
               id="email-input"
-              disabled={isModifying && !onLoading ? false : true}
+              disabled={isModifying && !isFormDisabled ? false : true}
               onChange={onChange}
               value={values.email || ""}
             />

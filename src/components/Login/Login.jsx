@@ -6,7 +6,7 @@ import './Login.css';
 
 import AuthLayout from '../AuthLayout/AuthLayout';
 
-function Login({ onLogin, onLoading, loggedIn }) {
+function Login({ isFormDisabled, onLogin, loggedIn }) {
   const { values, errors, isFormValid, onChange } = useFormWithValidation();
 
   function handleSubmit(event) {
@@ -23,7 +23,7 @@ function Login({ onLogin, onLoading, loggedIn }) {
         name="login"
         onSubmit={handleSubmit}
         isFormValid={isFormValid}
-        buttonText={onLoading ? "Вход..." : "Войти"}
+        buttonText={"Войти"}
       >
         <label className="form__input-container">
           E-mail
@@ -36,9 +36,8 @@ function Login({ onLogin, onLoading, loggedIn }) {
             placeholder="Ввведите email"
             required
             autoComplete="off"
-            minLength="6"
             id="email-input"
-            disabled={onLoading ? true : false}
+            disabled={isFormDisabled}
             onChange={onChange}
             value={values.email || ''}
           />
@@ -59,9 +58,8 @@ function Login({ onLogin, onLoading, loggedIn }) {
             form="login"
             placeholder="Ввведите пароль"
             required
-            minLength="6"
-            maxLength="30"
-            disabled={onLoading ? true : false}
+            minLength="8"
+            disabled={isFormDisabled}
             id="password-input"
             onChange={onChange}
             value={values.password || ''}
@@ -73,6 +71,16 @@ function Login({ onLogin, onLoading, loggedIn }) {
             {errors.password || ''}
           </span>
         </label>
+        <button
+          className={`form__button-submit form__button-submit_type_login ${
+            (!isFormValid || isFormDisabled) && "form__button-submit_disabled" 
+          }`}
+          type="submit"
+          isFormValid={isFormValid}
+          isFormDisabled={isFormDisabled}
+        >
+          {isFormDisabled ? "Вход..." : "Войти"}
+        </button>
       </AuthLayout>
     </main>
   );

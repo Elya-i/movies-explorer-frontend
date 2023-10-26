@@ -1,11 +1,13 @@
-import React from "react";
-import { Navigate } from "react-router-dom";
-import useFormWithValidation from "../../hooks/useFormWithValidation";
+import React from 'react';
+import { Navigate } from 'react-router-dom';
+import useFormWithValidation from '../../hooks/useFormWithValidation';
+
 import "./Register.css";
-import AuthLayout from "../AuthLayout/AuthLayout";
+
+import AuthLayout from '../AuthLayout/AuthLayout';
 import { REG_EXP_USER_NAME } from "../../utils/constants";
 
-function Register({ onRegister, onLoading, loggedIn }) {
+function Register({ isFormDisabled, onRegister, loggedIn }) {
 
   const { values, errors, isFormValid, onChange } = useFormWithValidation();
 
@@ -23,7 +25,7 @@ function Register({ onRegister, onLoading, loggedIn }) {
         name="register"
         onSubmit={onSubmit}
         isFormValid={isFormValid}
-        buttonText={onLoading ? "Регистрация..." : "Зарегистрироваться"}
+        buttonText={"Зарегистрироваться"}
       >
         <label className="form__input-container">
           Имя
@@ -38,7 +40,7 @@ function Register({ onRegister, onLoading, loggedIn }) {
             minLength="2"
             maxLength="30"
             pattern={REG_EXP_USER_NAME}
-            disabled={onLoading ? true : false}
+            disabled={isFormDisabled}
             id="name-input"
             onChange={onChange}
             value={values.name || ''}
@@ -60,8 +62,7 @@ function Register({ onRegister, onLoading, loggedIn }) {
             form="register"
             required
             placeholder="Введите email"
-            minLength="6"
-            disabled={onLoading ? true : false}
+            disabled={isFormDisabled}
             id="email-input"
             onChange={onChange}
             value={values.email || ''}
@@ -84,9 +85,8 @@ function Register({ onRegister, onLoading, loggedIn }) {
             required
             autoComplete="off"
             placeholder="Введите пароль"
-            minLength="6"
-            maxLength="30"
-            disabled={onLoading ? true : false}
+            minLength="8"
+            disabled={isFormDisabled}
             id="password-input"
             onChange={onChange}
             value={values.password || ""}
@@ -99,6 +99,16 @@ function Register({ onRegister, onLoading, loggedIn }) {
             {errors.password || ""}
           </span>
         </label>
+        <button
+          className={`form__button-submit form__button-submit_type_register ${
+            (!isFormValid || isFormDisabled) && "form__button-submit_disabled"
+          }`}
+          type="submit"
+          isFormValid={isFormValid}
+          isFormDisabled={isFormDisabled}
+        >
+          {isFormDisabled ? "Регистрация..." : "Зарегистрироваться"}
+        </button>
       </AuthLayout>
     </main>
   );
