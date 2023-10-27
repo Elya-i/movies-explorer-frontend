@@ -42,7 +42,7 @@ function Profile({ isFormDisabled, onUpdateUser, onLogout }) {
           reference="profile"
         />
         <Form
-          name = "profile"
+          name="profile"
           onSubmit={handleSubmit}
           isFormValid={isFormValid}
           isUserDataChanged={isUserDataChanged}
@@ -64,7 +64,7 @@ function Profile({ isFormDisabled, onUpdateUser, onLogout }) {
               maxLength="30"
               pattern={REG_EXP_USER_NAME}
               id="name-input"
-              disabled={isModifying && !isFormDisabled ? false : true}
+              readOnly={!isModifying && true}
               onChange={onChange}
               value={values.name || ""}
             />
@@ -80,7 +80,7 @@ function Profile({ isFormDisabled, onUpdateUser, onLogout }) {
               form="profile"
               required
               id="email-input"
-              disabled={isModifying && !isFormDisabled ? false : true}
+              readOnly={!isModifying && true}
               onChange={onChange}
               value={values.email || ""}
             />

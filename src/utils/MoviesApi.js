@@ -11,7 +11,7 @@ class MoviesApi {
       return response.json();
     }
     else {
-      return Promise.reject(`Возникла ошибка: ${response.status}`);
+      return Promise.reject(`Ошибка: ${response.status}`);
     }
   };
 

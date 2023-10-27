@@ -64,7 +64,6 @@ function App() {
 
   function handleCheckToken() {
     if (localStorage.getItem('isLoggedIn')) {
-      mainApi.authenticate()
       mainApi.getUserData()
         .then(({ name, email }) => {
           setCurrentUser((prev) => ({...prev, name: name, email: email}))
@@ -209,7 +208,6 @@ function App() {
     setCurrentUser(() => ({name: '', email: ''}));
     resetState();
     setLoggedIn(false); 
-    mainApi.authenticate('')
     navigate('/', {replace: true});
   }
 

@@ -61,16 +61,6 @@ class MainApi {
     .then(this._checkServerResponse);
   };
 
-  authenticate() {
-    return fetch(`${MAIN_API_URL}/users/me`, {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    }).then(this._checkServerResponse);
-  };
-
   updateUserData({ email, name }) {
     return fetch(`${MAIN_API_URL}/users/me`, {
       method: 'PATCH',
