@@ -126,6 +126,7 @@ function App() {
           return false;
         }
       })
+      .finally(() => setIsFormDisabled(false))
   }
    
   function handleRegistration({ email, password, name }) {
@@ -144,7 +145,6 @@ function App() {
         }
       })
       .catch((error) => {
-        setIsFormDisabled(false)
         if (error.message === 'Ошибка: 409') {
           setInfoTooltip({
             message: 'Пользователь с указанным email уже существует',
@@ -170,6 +170,7 @@ function App() {
           return false;
         }
       })
+      .finally(() => setIsFormDisabled(false))
   }
 
   function handleUpdateUser(userData) {
@@ -201,6 +202,7 @@ function App() {
           return false;
         }
       })
+      .finally(() => setIsFormDisabled(false))
   }
 
   function handleLogout() {
