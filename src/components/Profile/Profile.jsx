@@ -42,11 +42,10 @@ function Profile({ isFormDisabled, onUpdateUser, onLogout }) {
           reference="profile"
         />
         <Form
-          name="profile"
+          name="profile" 
           onSubmit={handleSubmit}
           isFormValid={isFormValid}
           isUserDataChanged={isUserDataChanged}
-          buttonText={"Сохранить"}
           isModifying={isModifying}
         >
           <label className="form__input-container form__input-container_type_profile">
@@ -123,6 +122,19 @@ function Profile({ isFormDisabled, onUpdateUser, onLogout }) {
               </span>
             </div>
           </div>
+          <button
+          className={`form__button-submit form__button-submit_type_profile ${
+            !isModifying
+            ? "form__button-submit_hidden"
+            : 
+            (!isFormValid || isFormDisabled || isUserDataChanged) && 
+            "form__button-submit_disabled"} button`}
+          type="submit"
+          isFormValid={isFormValid}
+          isFormDisabled={isFormDisabled}
+        >
+          {isFormDisabled ? "Сохранение..." : "Сохранить"}
+        </button>
         </Form>
         <div
           className={`profile__edit ${

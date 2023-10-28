@@ -185,7 +185,6 @@ function App() {
         });
       })
       .catch((error) => {
-        setIsFormDisabled(false)
         if (error.message === 'Ошибка: 409') {
           setInfoTooltip({
             message: 'Пользователь с указанным email уже существует',
