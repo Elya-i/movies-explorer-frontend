@@ -1,5 +1,5 @@
 .page {
-  max-width: 1600px;
+  /* max-width: 1600px; */
   margin: 0 auto;
   min-width: 320px;
   min-height: 100vh;
@@ -14,7 +14,14 @@
   text-rendering: optimizeLegibility;
 }
 
-.page__container_blue {
+.page__container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.page_theme_blue {
   background-color: #073042;
 }
 

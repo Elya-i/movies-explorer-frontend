@@ -31,7 +31,7 @@ function Portfolio() {
         <li className="portfolio__list-item">
           <a
             className="portfolio__link link"
-            href="https://elya-i.students.nomoredomainsicu.ru"
+            href="https://elya-i.github.io/sign-in"
             target="_blank"
             rel="noreferrer"
           >

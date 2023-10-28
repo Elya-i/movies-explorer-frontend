@@ -1,53 +1,88 @@
 import React from 'react';
+import { Navigate } from 'react-router-dom';
+import useFormWithValidation from '../../hooks/useFormWithValidation';
+
 import './Login.css';
-import { Link } from 'react-router-dom';
-import headerLogo from '../../images/header-logo.svg';
 
+import AuthLayout from '../AuthLayout/AuthLayout';
 
-function Login() {
-  return (
-    <section className="authorization">
-      <div className="authorization__container">
-      <Link to="/" className="link">
-          <img src={headerLogo} className="authorization__logo" alt="Логотип проекта Movies Explorer" />
-        </Link>
-        <h1 className="authorization__title">Рады видеть!</h1>
-        <form className="authorization__form" name="login">
-          <fieldset className="authorization__fieldset">
-            <div className="authorization__input-container">
-              <label className="authorization__input-label">E-mail</label>
-              <input
-                id="email-input"
-                className="authorization__input"
-                type="email"
-                placeholder="Введите email"
-                name="email"
-                minLength="5"
-                maxLength="30"
-                required />
-            </div>
-            <div className="authorization__input-container">
-              <label className="authorization__input-label">Пароль</label>
-              <input
-                id="password-input"
-                className="authorization__input"
-                type="password"
-                placeholder="Введите пароль"
-                name="password"
-                minLength="8"
-                maxLength="30"
-                required />
-            </div>
-          </fieldset>
-          <span className=" authorization__error authorization__error_login">Что-то пошло не так...</span>
-          <button className="authorization__button button" type="submit">Войти</button>
-          <div className="authorization__confirmation-container">
-            <p className="authorization__confirmation">Ещё не зарегистрированы?</p>
-            <Link className="authorization__confirmation authorization__confirmation_link link" to='/signup'>&nbsp;Регистрация</Link>
-          </div>
-        </form>
-      </div>
-    </section>
+function Login({ isFormDisabled, onLogin, loggedIn }) {
+  const { values, errors, isFormValid, onChange } = useFormWithValidation();
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    onLogin(values);
+  }
+
+  return loggedIn ? (
+    <Navigate to="/" replace />
+  ) : (
+    <main className="login">
+      <AuthLayout
+        title="Рады видеть!"
+        name="login"
+        onSubmit={handleSubmit}
+        isFormValid={isFormValid}
+        buttonText={"Войти"}
+      >
+        <label className="form__input-container">
+          E-mail
+          <input
+            className={`form__input ${errors.email ? 
+              "form__input_incorrect" : ''}`}
+            type="text"
+            name="email"
+            form="login"
+            placeholder="Ввведите email"
+            required
+            autoComplete="off"
+            id="email-input"
+            disabled={isFormDisabled}
+            onChange={onChange}
+            value={values.email || ''}
+          />
+          <span
+            className={`form__input-error ${errors.email ? 
+            "form__input-error_active" : ''}`}
+          >
+            {errors.email || ''}
+          </span>
+        </label>
+        <label className="form__input-container">
+          Пароль
+          <input
+            className={`form__input ${errors.password ? 
+              "form__input_incorrect" : ''}`}
+            type="password"
+            name="password"
+            form="login"
+            placeholder="Ввведите пароль"
+            required
+            minLength="8"
+            disabled={isFormDisabled}
+            id="password-input"
+            onChange={onChange}
+            value={values.password || ''}
+          />
+          <span
+            className={`form__input-error ${errors.password ? 
+              "form__input-error_active" : ''}`}
+          >
+            {errors.password || ''}
+          </span>
+        </label>
+        <button
+          className={`form__button-submit form__button-submit_type_login ${
+            (!isFormValid || isFormDisabled) && "form__button-submit_disabled" 
+          }`}
+          type="submit"
+          isFormValid={isFormValid}
+          isFormDisabled={isFormDisabled}
+        >
+          {isFormDisabled ? "Вход..." : "Войти"}
+        </button>
+      </AuthLayout>
+    </main>
   );
 }
 
